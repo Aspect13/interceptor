@@ -38,4 +38,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ inputs.docker_tag || "getcarrier/interceptor:latest" }}
+          tags: ${{ inputs.docker_tag || 'getcarrier/interceptor:latest' }}
