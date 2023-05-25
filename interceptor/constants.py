@@ -23,28 +23,10 @@ LOKI_PORT = int(environ.get('LOKI_PORT', 3100))
 LOG_LEVEL = environ.get('LOG_LEVEL', 'info')
 REMOVE_CONTAINERS = True if environ.get("REMOVE_CONTAINERS", "True") == "True" else False
 
-UNZIP_DOCKERFILE = """FROM kubeless/unzip:latest
-ADD {localfile} /tmp/{docker_path}
-ENTRYPOINT ["unzip", "/tmp/{docker_path}", "-d", "/tmp/unzipped"]
-"""
-
-UNZIP_DOCKER_COMPOSE = """version: '3'
-services:
-  unzip:
-    build: {path}
-    volumes:
-      - {volume}:/tmp/unzipped
-    labels:
-      - 'traefik.enable=false'
-    container_name: unzip-{task_id}
-volumes:
-  {volume}:
-    external: true
-"""
 
 NAME_CONTAINER_MAPPING = {
-    "Python 3.7": 'lambda:python3.7',
     "Python 3.8": 'lambda:python3.8',
+    "Python 3.7": 'lambda:python3.7',
     "Python 3.6": 'lambda:python3.6',
     "Python 2.7": 'lambda:python2.7',
     ".NET Core 2.0 (C#)": 'lambda:dotnetcore2.0',

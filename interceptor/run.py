@@ -11,7 +11,6 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-import logging
 import signal
 from json import dumps
 from os import environ
@@ -24,8 +23,7 @@ from uuid import uuid4
 import boto3
 import requests
 from arbiter import Minion
-# from google.cloud import compute_v1
-from google.oauth2.service_account import Credentials
+
 from interceptor.containers_backend import KubernetesClient, DockerClient, Job, KubernetesJob
 from interceptor.jobs_wrapper import JobsWrapper
 from interceptor.lambda_executor import LambdaExecutor
@@ -62,6 +60,9 @@ signal.signal(signal.SIGTERM, sigterm_handler)
 def terminate_gcp_instances(
         service_account_info: dict, project: str, zone: str, instances: List[str]
 ):
+    from google.cloud import compute_v1
+    from google.oauth2.service_account import Credentials
+    # https://cloud.google.com/compute/docs/reference/rest/v1/instances/delete
     try:
         credentials = Credentials.from_service_account_info(service_account_info)
         instance_client = compute_v1.InstancesClient(credentials=credentials)
