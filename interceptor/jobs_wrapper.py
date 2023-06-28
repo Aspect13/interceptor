@@ -90,7 +90,7 @@ class JobsWrapper(object):
         params = ['loki_host', 'loki_port', 'galloper_url', 'bucket', 'artifact',
                   'results_bucket', 'additional_files',
                   'JVM_ARGS', 'save_reports', 'project_id', 'token', "report_id", "cpu_quota",
-                  "memory_quota", "custom_cmd"]
+                  "memory_quota", "custom_cmd", "integrations"]
         for key in params:
             if key in execution_params.keys():
                 env_vars[key] = execution_params[key]
@@ -149,7 +149,7 @@ class JobsWrapper(object):
                   'galloper_url', 'bucket', 'test', 'test_name', 'results_bucket', 'artifact',
                   'additional_files', 'save_reports',
                   'project_id', 'token', 'compile_and_run', 'JVM_ARGS', "report_id",
-                  "cpu_quota", "memory_quota", "custom_cmd"]
+                  "cpu_quota", "memory_quota", "custom_cmd", "integrations"]
         for key in params:
             if key in execution_params.keys():
                 env_vars[key] = execution_params[key]
